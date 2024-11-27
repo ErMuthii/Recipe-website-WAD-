@@ -1,4 +1,4 @@
-const supabase = require('../config/supabase'); 
+import { supabase } from '../config/supabase.js';
 
 const getAllRecipes = async (req, res) => {
   const { data, error } = await supabase
@@ -30,8 +30,5 @@ const getRecipesByCategory = async (req, res) => {
   res.json(data);
 };
 
-module.exports = { 
-  getAllRecipes, 
-  getRecipeById, 
-  getRecipesByCategory 
-};
+export { getAllRecipes, getRecipeById, getRecipesByCategory };
+  

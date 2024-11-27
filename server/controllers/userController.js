@@ -1,4 +1,4 @@
-const supabase = require('../config/supabase');
+import { supabase } from '../config/supabase.js';
 
 const getAllUsers = async (req, res) => {
   const { data, error } = await supabase
@@ -21,4 +21,4 @@ const getUserByIdentifier = async (req, res) => {
   res.json(data);
 };
 
-module.exports = { getAllUsers, getUserByIdentifier };
+export { getAllUsers, getUserByIdentifier };

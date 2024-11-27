@@ -1,10 +1,12 @@
 const express = require('express');
-const { getAllUsers, getUserByIdentifier } = require('../controllers/userController');
-const { verifyAPIToken } = require('../middleware/authMiddleware');
+
+import { getAllUsers,getUserByIdentifier } from '../controllers/userController.js';
+import { verifyAPIToken } from '../middleware/authMiddleware.js';
+
 
 const router = express.Router();
 
 router.get('/', verifyAPIToken, getAllUsers);
 router.get('/:identifier', verifyAPIToken, getUserByIdentifier);
 
-module.exports = router;
+export default router;

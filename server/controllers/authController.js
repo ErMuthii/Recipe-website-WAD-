@@ -1,5 +1,5 @@
-const supabase = require('../config/supabase');
-const { generateAPIToken } = require('../config/apiTokenGenerator');
+import { supabase } from '../config/supabase.js';
+import { generateAPIToken } from '../config/apiTokenGenerator.js';
 
 const registerUser = async (req, res) => {
   try {
@@ -30,4 +30,4 @@ const registerUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser };
+export { registerUser };

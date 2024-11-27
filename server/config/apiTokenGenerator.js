@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET, API_TOKEN_EXPIRY } = require('../config/environment');
+import { JWT_SECRET,API_TOKEN_EXPIRY } from '../config/environment.js';
+
 
 function generateAPIToken(userId) {
   return jwt.sign(
@@ -12,4 +13,4 @@ function generateAPIToken(userId) {
   );
 }
 
-module.exports = { generateAPIToken };
+export {generateAPIToken}

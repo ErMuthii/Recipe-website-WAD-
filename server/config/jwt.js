@@ -1,6 +1,7 @@
 // src/config/jwt.js
 import jwt from 'jsonwebtoken'
 
+
 export const generateAPIToken = (user, expiresIn = '30d') => {
   return jwt.sign(
     { 

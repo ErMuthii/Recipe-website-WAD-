@@ -1,10 +1,10 @@
-const express = require('express');
-const cors = require('cors');
-const { swaggerSpec, swaggerUi } = require('./utils/swagger');
+import express from 'express';
+import cors from 'cors';
+import { swaggerSpec, swaggerUi } from './utils/swagger.js';
 
-const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
-const recipeRoutes = require('./routes/recipeRoutes');
+import authRoutes from './routes/authRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import recipeRoutes from './routes/recipeRoutes.js';
 
 const app = express();
 
@@ -20,4 +20,4 @@ app.use('/api/recipes', recipeRoutes);
 // Swagger Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-module.exports = app;
+export default app;

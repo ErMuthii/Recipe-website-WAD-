@@ -1,10 +1,8 @@
 const express = require('express');
-const { 
-  getAllRecipes, 
-  getRecipeById, 
-  getRecipesByCategory 
-} = require('../controllers/recipeController');
-const { verifyAPIToken } = require('../middleware/authMiddleware');
+
+import { getAllRecipes,getRecipeById,getRecipesByCategory } from '../controllers/recipeController.js';
+import { verifyAPIToken } from '../middleware/authMiddleware.js';
+
 
 const router = express.Router();
 
@@ -12,4 +10,4 @@ router.get('/', getAllRecipes);
 router.get('/:id', getRecipeById);
 router.get('/category/:category', getRecipesByCategory);
 
-module.exports = router;
+export default router;

@@ -1,5 +1,6 @@
-const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../config/apiTokenGenerator');
+
+const jwt = require('jsonwebtoken')
+import { JWT_SECRET } from '../config/environment.js';
 
 const verifyAPIToken = (req, res, next) => {
   const token = req.headers['authorization']?.split(' ')[1];
@@ -13,4 +14,4 @@ const verifyAPIToken = (req, res, next) => {
   }
 };
 
-module.exports = { verifyAPIToken };
+export { verifyAPIToken };
