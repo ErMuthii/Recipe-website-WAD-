@@ -2,6 +2,7 @@ import React from "react";
 import { Card, CardBody, Input, Button } from "@nextui-org/react";
 import { useForm } from "react-hook-form";
 import { UserIcon, LockClosedIcon } from "@heroicons/react/20/solid";
+import { supabase } from "../supabaseClient"; // Import your Supabase client
 
 const Login = () => {
   const {
@@ -12,26 +13,25 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    console.log("Logging in with data:", data); // Log data to verify form data
+    console.log("Logging in with data:", data);
+
     try {
-      const response = await fetch("https://your-api-endpoint.com/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+      // Use Supabase for user authentication
+      const { user, error } = await supabase.auth.signIn({
+        email: data.username, // Assumes username field holds email
+        password: data.password,
       });
 
-      if (response.ok) {
-        console.log("Login successful");
+      if (error) {
+        console.error("Login failed:", error.message);
+        alert("Login failed. Please check your credentials.");
+      } else {
+        console.log("Login successful:", user);
         alert("Login successful");
         reset(); // Reset form after successful login
-      } else {
-        console.log("Login failed");
-        alert("Login failed. Please check your credentials.");
       }
     } catch (error) {
-      console.log("Error logging in:", error);
+      console.error("Error logging in:", error);
       alert("An error occurred. Please try again.");
     }
   };
@@ -45,10 +45,10 @@ const Login = () => {
             <Input
               isInvalid={!!errors.username}
               errorMessage={errors.username && errors.username.message}
-              label="Username"
-              placeholder="Enter your username"
+              label="Email"
+              placeholder="Enter your email"
               endContent={<UserIcon className="w-5 h-5 text-gray-400" />}
-              {...register("username", { required: "Username is required" })}
+              {...register("username", { required: "Email is required" })}
             />
 
             <Input
