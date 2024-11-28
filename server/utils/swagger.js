@@ -1,6 +1,6 @@
 
 import swaggerJSDoc from 'swagger-jsdoc';
-import swag
+import SwaggerUI from 'swagger-ui';
 
 
 
@@ -15,8 +15,9 @@ const swaggerOptions = {
     },
     servers: [{ url: 'http://localhost:3000' }]
   },
-  apis: ['./src/routes/*.js']
+  apis: ['./routes/*.js']
 };
+
 
 export const swaggerSpec = swaggerJSDoc(swaggerOptions);
 

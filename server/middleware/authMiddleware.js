@@ -1,5 +1,5 @@
 
-const jwt = require('jsonwebtoken')
+import jwt from 'jsonwebtoken'
 import { JWT_SECRET } from '../config/environment.js';
 
 const verifyAPIToken = (req, res, next) => {

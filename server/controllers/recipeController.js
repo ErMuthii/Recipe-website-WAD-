@@ -21,10 +21,16 @@ const getRecipeById = async (req, res) => {
 };
 
 const getRecipesByCategory = async (req, res) => {
+  const category = req.params.category;
+
+  const validCategories = ['Breakfast','Lunch','Dinner'];
+  if(!validCategories.includes(category)){
+    return res.status(400).json({error:'Invalid category. Valid categories are Breakfast,Lunch,Dinner'})
+  }
   const { data, error } = await supabase
     .from('recipes')
     .select('*')
-    .eq('category', req.params.category);
+    .eq('category', category);
   
   if (error) return res.status(500).json({ error: error.message });
   res.json(data);

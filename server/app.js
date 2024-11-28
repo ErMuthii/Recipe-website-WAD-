@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import { swaggerSpec, swaggerUi } from './utils/swagger.js';
+import { swaggerSpec } from './utils/swagger.js';
+import SwaggerUI from 'swagger-ui-express';
 
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
@@ -18,6 +19,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/recipes', recipeRoutes);
 
 // Swagger Documentation
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', SwaggerUI.serve, SwaggerUI.setup(swaggerSpec));
 
 export default app;

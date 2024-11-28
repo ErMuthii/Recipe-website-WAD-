@@ -7,9 +7,11 @@ import {
   LockClosedIcon,
   LockOpenIcon,
 } from "@heroicons/react/20/solid";
+import { supabase } from "../supabaseClient.js"
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const Registration = () => {
+  
   const {
     register,
     handleSubmit,
@@ -21,22 +23,20 @@ const Registration = () => {
   const onSubmit = async (data) => {
     console.log("Submitting registration form with data:", data);
     try {
-      const response = await fetch("https://formspree.io/f/yourformid", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        alert("Registration successful");
-        reset();
-      } else {
-        alert("Form submission failed");
+      const {data: userData, error} = await supabase
+        .from('users')
+        .insert([
+          {username:data.username,email:data.email,password: data.password}
+        ]);
+      if (error){
+        throw error;
       }
-    } catch (error) {
+
+      alert("Registration successful");
+      reset();
+    } catch(error){
       alert("An error occurred. Please try again.");
+      console.error("Error during registration:", error);
     }
   };
 
